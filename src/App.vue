@@ -1,10 +1,16 @@
+<script setup lang="ts">
+import MainLayout from './layout/MainLayout.vue';
+
+</script>
+
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+ <!-- <MainLayout>
+    <router-view/>
+ </MainLayout> -->
+ <router-view/>
 </template>
+
 
 <style>
 #app {

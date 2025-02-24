@@ -1,5 +1,17 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { BootstrapVue3, BOffcanvas, BContainer } from 'bootstrap-vue-3'
 
-createApp(App).use(router).mount('#app')
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+const app = createApp(App)
+app.use(router)
+app.use(BootstrapVue3)
+app.use(VueAxios, axios)
+app.component('b-offcanvas', BOffcanvas)
+app.component('b-container', BContainer)
+app.mount('#app')
