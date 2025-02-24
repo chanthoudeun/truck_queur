@@ -7,8 +7,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
+import { createPinia } from 'pinia'
+const pinia = createPinia()
 const app = createApp(App)
+app.use(pinia)
 app.use(router)
 app.use(BootstrapVue3)
 app.use(VueAxios, axios)

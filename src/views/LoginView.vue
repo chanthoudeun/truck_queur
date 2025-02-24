@@ -2,8 +2,11 @@ DashboardView<script setup lang="ts">
 import apis from '@/libraries/apis';
 import { ILoginReq } from '@/libraries/model/auth/iLoginReq';
 import router from '@/router';
+import { useAuthStore } from '@/stores/auth';
+import { createPinia } from 'pinia';
 import { ref } from 'vue';
-
+const pinia = createPinia();
+const authStore = useAuthStore(pinia); 
 const loginRequest = ref<ILoginReq>({
   employeeId: "900182033",
   password: "123",
@@ -14,8 +17,9 @@ const login = async () => {
     var rep = await apis.login(loginRequest.value);
     var result = rep; 
     if (result && result.token) {
+      authStore.setUser(result);
       console.log("Login successful:", result);
-      // localStorage.setItem("token", rep.Result.token); // Store token
+      console.log("Auth Store successful:", authStore.user?.token);
       router.push("/dashboard"); // Redirect to dashboard
     } else {
       alert(`Login failed! Please check your credentials. ${result}`);
