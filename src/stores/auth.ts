@@ -13,9 +13,22 @@ export const useAuthStore = defineStore('auth', {
             this.user = userData;
             localStorage.setItem('user', JSON.stringify(userData)); // Save user data
         },
-        logout() {
-            this.user = null;
-            localStorage.removeItem('user'); // Remove from storage
-        }
+        async logout() {
+            const authStore = useAuthStore();
+            var rep = await apis.logout(authStore.user?.userId ?? "");
+            var result = rep;
+            if (result) {
+                console.log("Login successful:", result);
+                alert(`Logout success`);
+                this.user = null;
+                localStorage.removeItem('user');
+                router.push("/"); // Redirect to dashboard
+            } else {
+                alert(`Login failed! Please check your credentials. ${result}`);
+
+            }
+        },
+
+
     }
 });

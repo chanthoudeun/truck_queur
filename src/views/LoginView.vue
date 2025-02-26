@@ -4,7 +4,7 @@ import { ILoginReq } from '@/libraries/model/auth/iLoginReq';
 import router from '@/router';
 import { useAuthStore } from '@/stores/auth';
 import { createPinia } from 'pinia';
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
 const pinia = createPinia();
 const authStore = useAuthStore(pinia); 
 const loginRequest = ref<ILoginReq>({
@@ -20,11 +20,11 @@ const login = async () => {
       authStore.setUser(result);
       console.log("Login successful:", result);
       console.log("Auth Store successful:", authStore.user?.token);
-       router.push("/dashboard"); // Redirect to dashboard
-       location.reload(); 
+      router.push("/dashboard"); 
+      location.reload(); 
     } else {
       alert(`Login failed! Please check your credentials. ${result}`);
-     
+    
     }
 
   } catch (error) {

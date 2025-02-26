@@ -29,11 +29,15 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use(
-    (response) => response,
+    (response) => {
+        // Modify or process response data
+        console.log("Response received:", response);
+        return response; // Always return response
+    },
     (error) => {
         if (error.response?.status === 403) {
-            // const authStore = useAuthStore();
-            // authStore.logout();
+            const authStore = useAuthStore();
+            authStore.logout();
             window.location.href = "login";
         }
         Promise.reject(error);
