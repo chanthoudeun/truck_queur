@@ -1,4 +1,4 @@
-DashboardView<script setup lang="ts">
+<script setup lang="ts">
 import apis from '@/libraries/apis';
 import { ILoginReq } from '@/libraries/model/auth/iLoginReq';
 import router from '@/router';
@@ -20,12 +20,13 @@ const login = async () => {
       authStore.setUser(result);
       console.log("Login successful:", result);
       console.log("Auth Store successful:", authStore.user?.token);
-      router.push("/dashboard"); // Redirect to dashboard
+       router.push("/dashboard"); // Redirect to dashboard
+       location.reload(); 
     } else {
       alert(`Login failed! Please check your credentials. ${result}`);
      
     }
-  
+
   } catch (error) {
     console.error("Login error:", error);
     alert("An error occurred during login.");

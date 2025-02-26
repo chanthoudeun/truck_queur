@@ -1,14 +1,38 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import MainLayout from './layout/MainLayout.vue';
+import { useAuthStore } from './stores/auth';
+import { useRoute, useRouter } from 'vue-router';
+const authStore = useAuthStore();
+const router = useRouter();
+const route = useRoute(); // Get the current route object
+// Restore user from localStorage on app load
+if (!authStore.user) {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+        authStore.setUser(JSON.parse(savedUser));
+    }
+}
 
+const isAuthenticated = computed(() => !!authStore.user); 
+
+// Check if the current route is the login page
+const isLoginPage = computed(() => route.path === '/');
+
+// Redirect to dashboard if the user is already logged in and tries to access the login page
+if (isAuthenticated.value && isLoginPage.value) {
+  router.push('/dashboard');
+}
 </script>
 
 
 <template>
- <!-- <MainLayout>
-    <router-view/>
- </MainLayout> -->
- <router-view/>
+  <!-- Only show MainLayout when the user is logged in -->
+  <MainLayout v-if="isAuthenticated">
+    <router-view />
+  </MainLayout>
+  <!-- You can show login or other layout if the user is not authenticated -->
+  <router-view v-else />
 </template>
 
 

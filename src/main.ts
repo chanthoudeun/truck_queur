@@ -10,8 +10,8 @@ import VueAxios from 'vue-axios'
 import { createPinia } from 'pinia'
 const pinia = createPinia()
 const app = createApp(App)
-app.use(pinia)
 app.use(router)
+app.use(pinia)
 app.use(BootstrapVue3)
 app.use(VueAxios, axios)
 app.component('b-offcanvas', BOffcanvas)

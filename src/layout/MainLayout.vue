@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-const route = useRoute();
-const open = ref(true);
 
 </script>
 
@@ -14,7 +12,7 @@ const open = ref(true);
   </div>
   <ul class="sidebar-nav">
     <li >
-        <RouterLink to="/" class="nav-link"  active-class="active">
+        <RouterLink to="/dashboard" class="nav-link"  active-class="active">
             <span>Dashboard</span>
         </RouterLink>
     </li>
